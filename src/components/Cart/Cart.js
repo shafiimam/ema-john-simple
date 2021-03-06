@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Cart.css'
 const Cart = (props) => {
     const cart = props.cart;
@@ -36,6 +37,8 @@ const Cart = (props) => {
             <p>product price:{formatNumber(total)}</p>
             <p><small>tax+ vat: {formatNumber(tax)}</small></p>
             <h5 className="text-danger font-weight-bold">Total: {grandTotal}$</h5>
+            <br/>
+            <button className="main-button">Order</button>
         </div>
     );
 };
