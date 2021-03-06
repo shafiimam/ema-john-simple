@@ -7,8 +7,7 @@ import NotFound from './components/NotFound/NotFound'
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import {BrowserRouter as Router,
   Switch,
-  Route,
-  Link} from "react-router-dom";
+  Route} from "react-router-dom";
 
 function App() {
   return (
