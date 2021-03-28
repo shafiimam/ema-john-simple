@@ -5,7 +5,7 @@ import { userContext } from '../../App';
 const Shipment = () => {
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
-        console.log('form submitte', data);
+        console.log('form submitted', data);
     };
     const [loggedInUser,setLoggedInUser] = useContext(userContext)
     console.log(watch("example")); // watch input value by passing the name of it

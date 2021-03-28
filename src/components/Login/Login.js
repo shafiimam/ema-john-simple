@@ -46,7 +46,7 @@ function Login() {
   };
   const fbSignIn = () => {
     handleFbSignIn().then((res) => {
-        handleResponse(res,false)
+        handleResponse(res,true)
     });
   };
   const signOut = () => {
