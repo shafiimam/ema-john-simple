@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import fakeData from "../../fakeData/index";
+
 import { addToDatabaseCart, getDatabaseCart } from "../../utilities/databaseManager";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
@@ -11,7 +11,7 @@ const Shop = () => {
   const [cart,setCart]  = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3100/products')
+    fetch('https://morning-brook-56076.herokuapp.com/products')
     .then(res => res.json())
     .then(data => setProducts(data))
   },[])
@@ -38,7 +38,7 @@ const Shop = () => {
   useEffect(()=>{
     const savedCart = getDatabaseCart();
     const productKeys= Object.keys(savedCart);
-    fetch('http://localhost:3100/productsByKeys',{
+    fetch('https://morning-brook-56076.herokuapp.com/productsByKeys',{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(productKeys)

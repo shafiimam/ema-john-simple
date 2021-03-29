@@ -3,7 +3,7 @@ import fakeData from "../../fakeData/index";
 const Inventory = () => {
 const handleAddProduct = () => {
     const product = 
-    fetch('http://localhost:3100/addProduct',{
+    fetch('https://morning-brook-56076.herokuapp.com/addProduct',{
         method: 'POST',
         headers: { 'Content-Type':'application/json' },
         body: JSON.stringify(fakeData)
