@@ -7,10 +7,15 @@ import Product from "../Product/Product";
 import './Shop.css'
 const Shop = () => {
   document.title = 'shop'
-  const first10 = fakeData.slice(0, 10);
-  const [products] = useState(first10);
-
+  const [products,setProducts] = useState([]);
   const [cart,setCart]  = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3100/products')
+    .then(res => res.json())
+    .then(data => setProducts(data))
+  },[])
+
   const handleAddProduct = (product) =>{
     const sameProduct = cart.find(pd=> pd.key === product.key);
     let count = 1;
@@ -33,12 +38,13 @@ const Shop = () => {
   useEffect(()=>{
     const savedCart = getDatabaseCart();
     const productKeys= Object.keys(savedCart);
-    const previousCart = productKeys.map(existingKey=>{
-      const product = fakeData.find(pd=> pd.key === existingKey);
-      product.quantity = savedCart[existingKey];
-      return product;
+    fetch('http://localhost:3100/productsByKeys',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(productKeys)
     })
-    setCart(previousCart);
+    .then(res=>res.json())
+    .then(data =>setCart(data));
   },[])
   return (
     <div className="twin-container">
@@ -61,3 +67,5 @@ const Shop = () => {
 };
 
 export default Shop;
+
+

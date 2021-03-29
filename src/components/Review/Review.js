@@ -5,7 +5,6 @@ import {
   processOrder,
   removeFromDatabaseCart,
 } from "../../utilities/databaseManager";
-import fakeData from "../../fakeData/index";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import Cart from "../Cart/Cart";
 import { Link, useHistory } from "react-router-dom";
@@ -27,13 +26,14 @@ const Review = () => {
   useEffect(() => {
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
-    const cartProducts = productKeys.map((key) => {
-      const product = fakeData.find((pd) => pd.key === key);
-      product.quantity = savedCart[key];
-      return product;
-    });
 
-    setCart(cartProducts);
+    fetch('http://localhost:3100/productsByKeys',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(productKeys)
+    })
+    .then(res=>res.json())
+    .then(data =>setCart(data));
   }, []);
   let thankYou;
   if (orderPlaced == true) {
