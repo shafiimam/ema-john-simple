@@ -8,6 +8,13 @@ export const initializeLoginFramework = () => {
   }
 };
 
+const setUserToken = () =>{
+  firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+    sessionStorage.setItem('token', idToken)
+  }).catch(function(error) {
+    // Handle error
+  });
+}
 export const handleGoogleSignIn = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   return firebase
@@ -22,6 +29,7 @@ export const handleGoogleSignIn = () => {
         photo: photoURL,
         success: true,
       };
+      setUserToken()
       return signedInUser;
     })
     .catch((error) => {
